@@ -1,0 +1,3 @@
+-- Modificaciones:
+    - Cambiar llamada a strcmp, TEST, JNE por NOPs (0x90)
+    - Nunca se hace el test y la ejecución pasa directo al camino de correcta

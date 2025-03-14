@@ -1,0 +1,13 @@
+-- Sin inicializar:
+    - Tamaño ELF: 15k
+    - Se reserva la matriz pero queda llena con basura, no es necesario almacenar datos
+
+-- Init. con = {0}:
+    - Tamaño ELF: 15k
+    - Se reserva la matriz en ejecución y se llena con 0 (caso especial)
+
+-- Init. con valor cte:
+    - Tamaño ELF: 4.2M
+    - Esperado: 1024^2 * 4, 4M
+    - Diferencia: MB vs MiB?
+    - Se almacena la matriz completa para copiarla al inicializar

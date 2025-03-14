@@ -1,0 +1,60 @@
+== Intro ==
+
+-- Temas
+    - Análisis de ejecutables (reverse engineering)
+    - ASM
+    - ASM + C -> Compilers
+    - Memoria
+    - Periféricos
+    - Interrupciones
+    - Modo protegido
+    - Paginación
+    - 64bit/ARM
+-- Bibliografía
+    - Microprocesadores Intel, Barry B. Prey
+    - Organización de Computadoras, Andrew S. Tannenbaum
+    - Organización y Arquitectura de Computadoras, William Stallings
+    - Apuntes de la materia
+
+== Programas y Binarios ==
+
+-- Compilación C: C -> ASM -> ejecutable
+-- Ejecución
+    - Instrucciones disco -> memoria
+    - JMP a dirección de memoria asignada
+    - SO no hace nada mientras se ejecuta el programa
+        - Al finalizar -> Return al SO
+
+-- Programa en memoria
+    - Código -> instrucciones
+    - Datos -> vars estáticas y globales
+    - Heap -> memoria dinámica, asignada en tiempo de ejecución
+    - Stack -> variables locales a la función, etc
+
+    - Punteros en el CPU: código (IP), datos, pila
+        - Se guardan en registros -> lugar conocido por el CPU
+
+-- Programa en disco
+    - Headers: información meta sobre el programa para el SO
+    - Código y datos
+
+-- Llamadas a funciones (instrucción CALL)
+    - Guarda en el stack la dirección de return 
+    - Salta a la dirección de una función
+    - La función debe terminar con la instrucción RET -> salta a la dirección en el stack
+
+-- Llamadas a sistema operativo (System Calls)
+    - Memoria kernel space/user space
+        - Kernel space: reservada por el SO
+        - User space: disponible para programas
+    - SO controla acceso a recursos (memoria, I/O, dispositivos)
+    - System Call: llamada de User space a Kernel space
+        - Varias formas de hacer System Calls
+            - INT 80h (Interrupción 80) -> consume más tiempo
+            - Instrucciones SYSCALL/SYSRET (Intel), SYSENTER/SYSEXIT (AMD)
+            - vsyscall, VSDO -> Syscalls virtuales, páginas de memoria en User space para acelerar
+        - strace: muestra System Calls de un programa
+
+== Análisis de binario (Linux) ==
+
+

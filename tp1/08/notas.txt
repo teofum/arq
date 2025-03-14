@@ -1,0 +1,12 @@
+-- La contraseña debe tener 8 caracteres:
+    - 004006a0: call password_hard_64!strlen@plt
+    - 004006a5: mov [rbp-4], eax                    ; eax = strlen return
+    - 004006a8: cmp dword [rbp-4], 8                ; [rbp-4] == 8 (32bit)
+
+-- Cada caracter debe ser mayor (ASCII) al anterior
+    - (en un loop)
+    - 004006bb: mov rax, [rbp-0x18]                 ; [rbp-0x18] = inicio del string (+ offset por loop)
+    - 004006bf: movzx eax, byte [rax]               ; eax <- i_th byte del string (+ offset)
+    - 004006c2: cmp al, [rbp-9]                     ; [rbp-9] = valor del último char (init. 0)
+    - 004006c5: jge 0x4006ce                        ; jump si es mayor, sino cae en "return 0"
+

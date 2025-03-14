@@ -1,0 +1,24 @@
+- .interp               ??
+- .note.ABI-tag         ??
+- .note.gnu.build-id    ??
+- .gnu.hash             ??
+- .dynsym               ??
+- .dynstr               ??
+- .gnu.version          ??
+- .gnu.version_r        ??
+- .rela.dyn             ??
+- .rela.plt             ??
+- .init                 ??
+- .plt                  ??
+- .plt.got              ??
+- .text                 functions (main, fortune, etc)
+- .fini                 ??
+- .rodata               ReadOnly Data -> strings are here
+- .eh_frame             ??
+- .init_array           ??
+- .fini_array           ??
+- .jcr                  ??
+- .dynamic              ??
+- .data                 strings here?
+- .comment              ??
+
