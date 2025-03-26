@@ -1,0 +1,5 @@
+-- ASM Intel
+    - ISA x86
+    - Sintaxis Intel
+        ej: mov <dst>, <src>
+    
