@@ -3,6 +3,9 @@
 num2str.o: lib/num2str.s
 	nasm -f elf32 lib/num2str.s -o num2str.o
 
+sum.o: lib/sum.s
+	nasm -f elf32 lib/sum.s -o sum.o
+
 # Binary targets
 
 hello: 01_hello.o
@@ -22,3 +25,9 @@ num2str: 03_num2str.o num2str.o
 
 03_num2str.o: 03_num2str/num2str.s
 	nasm -f elf32 03_num2str/num2str.s -o 03_num2str.o
+
+sum: 04_sum.o sum.o num2str.o
+	ld -m elf_i386 04_sum.o sum.o num2str.o -o sum
+
+04_sum.o: 04_sum/sum.s
+	nasm -f elf32 04_sum/sum.s -o 04_sum.o
