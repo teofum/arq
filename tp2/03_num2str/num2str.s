@@ -1,6 +1,9 @@
 section .text
 
 global _start
+
+extern write_stdout
+extern exit
 extern num2str
 
 _start:
@@ -10,17 +13,11 @@ _start:
     push eax
     call num2str
 
-    ; Syscall: write
-    mov eax, 04h    ; write
-    mov ebx, 1      ; stdout file descriptor
     mov ecx, string ; ptr to text
     mov edx, 2      ; char count
-    int 80h
+    call write_stdout
 
-    ; Syscall: exit
-    mov eax, 01h    ; exit
-    mov ebx, 1      ; exit with code 0, success
-    int 80h
+    call exit
 
 section .data
 num     dd 76

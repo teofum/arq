@@ -1,18 +1,15 @@
 section .text
-GLOBAL _start
+global _start
+
+extern write_stdout
+extern exit
 
 _start:
-    ; Syscall: write
-    mov eax, 04h    ; write
-    mov ebx, 1      ; stdout file descriptor
     mov ecx, hello  ; ptr to text
     mov edx, len    ; char count
-    int 80h
+    call write_stdout
 
-    ; Syscall: exit
-    mov eax, 01h    ; exit
-    mov ebx, 1      ; exit with code 0, success
-    int 80h
+    call exit
 
 section .data
 hello   db  "Hello World", 10

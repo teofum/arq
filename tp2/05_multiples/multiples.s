@@ -1,37 +1,35 @@
 section .text
 global _start
 
+extern write_stdout
+extern exit
 extern num2str
 
 _start:
     ; Initialize
     mov eax, [n]
     mov ebx, [k]
-    mov ecx, eax
-    mov edx, ost    ; Need the mem address in a register so we can push it
+    mov ecx, ost    ; Need the mem address in a register so we can push it
+    mov edx, eax
 
 loop:
+    ; Print number to string
     push eax
-    push edx
+    push ecx
     call num2str
 
-    ; Syscall: write
+    ; Print to stdout
     pushad          ; Store regs
-    mov eax, 04h    ; write
-    mov ebx, 1      ; stdout file descriptor
-    mov ecx, ost    ; ptr to text
-    mov edx, len    ; char count
-    int 80h
+    mov edx, len
+    call write_stdout
     popad           ; Restore regs
 
-    add eax, ecx
+    ; Increase by n and loop while n <= k
+    add eax, edx
     cmp eax, ebx
     jle loop
 
-    ; Syscall: exit
-    mov eax, 01h    ; exit
-    mov ebx, 1      ; exit with code 0, success
-    int 80h
+    call exit
 
 section .data
 n   dd  3

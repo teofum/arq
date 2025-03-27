@@ -1,5 +1,8 @@
 section .text
-GLOBAL _start
+global _start
+
+extern write_stdout
+extern exit
 
 is_lowerc:
     cmp al, 61h         ; 61h = 'a'
@@ -38,17 +41,11 @@ _start:
     mov edx, len    ; char count
     call to_upper
 
-    ; Syscall: write
-    mov eax, 04h    ; write
-    mov ebx, 1      ; stdout file descriptor
     mov ecx, string ; ptr to text
     mov edx, len    ; char count
-    int 80h
+    call write_stdout
 
-    ; Syscall: exit
-    mov eax, 01h    ; exit
-    mov ebx, 1      ; exit with code 0, success
-    int 80h
+    call exit
 
 section .data
 string  db  "h4ppy c0d1ng", 10
