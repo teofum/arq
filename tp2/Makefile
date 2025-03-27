@@ -31,3 +31,9 @@ sum: 04_sum.o sum.o num2str.o
 
 04_sum.o: 04_sum/sum.s
 	nasm -f elf32 04_sum/sum.s -o 04_sum.o
+
+multiples: 05_multiples.o num2str.o
+	ld -m elf_i386 05_multiples.o num2str.o -o multiples
+
+05_multiples.o: 05_multiples/multiples.s
+	nasm -f elf32 05_multiples/multiples.s -o 05_multiples.o
