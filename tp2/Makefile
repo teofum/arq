@@ -40,3 +40,9 @@ multiples: 05_multiples.o num2str.o syscall.o
 
 05_multiples.o: 05_multiples/multiples.s
 	nasm -f elf32 05_multiples/multiples.s -o 05_multiples.o
+
+fact: 06_fact.o num2str.o syscall.o
+	ld -m elf_i386 06_fact.o num2str.o syscall.o -o fact
+
+06_fact.o: 06_fact/fact.s
+	nasm -f elf32 06_fact/fact.s -o 06_fact.o

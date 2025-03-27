@@ -9,19 +9,19 @@ set -l libs $argv[3..]
 mkdir $dir_name
 
 echo "section .text
-GLOBAL _start
+global _start
+
+extern exit
 
 _start:
-    ; Syscall: exit
-    mov eax, 01h    ; exit
-    mov ebx, 1      ; exit with code 0, success
-    int 80h
+
+    call exit
 
 section .data" >> $dir_name/$name.s
 
 echo "
-$name: $dir_name.o $libs
-	ld -m elf_i386 $dir_name.o $libs -o $name
+$name: $dir_name.o syscall.o $libs
+	ld -m elf_i386 $dir_name.o syscall.o $libs -o $name
 
 $dir_name.o: $dir_name/$name.s
 	nasm -f elf32 $dir_name/$name.s -o $dir_name.o" >> Makefile
