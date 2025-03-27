@@ -55,3 +55,9 @@ min: 07_min.o syscall.o num2str.o arrays.o
 
 07_min.o: 07_min/min.s
 	nasm -f elf32 07_min/min.s -o 07_min.o
+
+sort: 08_sort.o syscall.o num2str.o arrays.o
+	ld -m elf_i386 08_sort.o syscall.o num2str.o arrays.o -o sort
+
+08_sort.o: 08_sort/sort.s
+	nasm -f elf32 08_sort/sort.s -o 08_sort.o
