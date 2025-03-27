@@ -16,42 +16,41 @@ global num2str
 ; call num2str
 
 num2str:
-        push ebp
-        mov ebp, esp
-        pushad
+    push ebp
+    mov ebp, esp
+    pushad
 
-        mov eax, [ebp + 8 + 1 * 4]
-        mov ebx, 0
-        mov ecx, 10
+    mov eax, [ebp + 8 + 1 * 4]
+    mov ebx, 0
+    mov ecx, 10
         
 num2str_loop:
-        mov edx, 0
-        div ecx
-        
-        add edx, 30h    ; EDX + '0'
-        push edx    
+    mov edx, 0
+    div ecx
+    
+    add edx, 30h    ; EDX + '0'
+    push edx    
 
-        inc ebx
-        
-        cmp eax, 0
-        jne num2str_loop
+    inc ebx
+    
+    cmp eax, 0
+    jne num2str_loop
 
-        mov ecx, [ebp + 8 + 0 * 4]
+    mov ecx, [ebp + 8 + 0 * 4]
 
 num2str_print:
-        pop edx
-        mov [ecx], dl   ; Print char
+    pop edx
+    mov [ecx], dl   ; Print char
 
-        inc ecx
-        dec ebx
-        jnz num2str_print
+    inc ecx
+    dec ebx
+    jnz num2str_print
 
-        mov dl, 0
-        mov [ecx], dl   ; Null terminator
+    mov dl, 0
+    mov [ecx], dl   ; Null terminator
 
-        popad
-        mov esp, ebp
-        pop ebp
-        ret
-
+    popad
+    mov esp, ebp
+    pop ebp
+    ret
 
