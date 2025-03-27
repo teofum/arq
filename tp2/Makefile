@@ -9,6 +9,9 @@ sum.o: lib/sum.s
 syscall.o: lib/syscall.s
 	nasm -f elf32 lib/syscall.s -o syscall.o
 
+arrays.o: lib/arrays.s
+	nasm -f elf32 lib/arrays.s -o arrays.o
+
 # Binary targets
 
 hello: 01_hello.o syscall.o
@@ -46,3 +49,9 @@ fact: 06_fact.o num2str.o syscall.o
 
 06_fact.o: 06_fact/fact.s
 	nasm -f elf32 06_fact/fact.s -o 06_fact.o
+
+min: 07_min.o syscall.o num2str.o arrays.o
+	ld -m elf_i386 07_min.o syscall.o num2str.o arrays.o -o min
+
+07_min.o: 07_min/min.s
+	nasm -f elf32 07_min/min.s -o 07_min.o
