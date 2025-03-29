@@ -5,6 +5,7 @@ extern write_stdout
 extern exit
 extern num2str
 extern sort
+extern qsort
 
 _start:
     ; Sort array

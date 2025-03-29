@@ -12,6 +12,9 @@ syscall.o: lib/syscall.s
 arrays.o: lib/arrays.s
 	nasm -f elf32 lib/arrays.s -o arrays.o
 
+args.o: lib/args.s
+	nasm -f elf32 lib/args.s -o args.o
+
 # Binary targets
 
 hello: 01_hello.o syscall.o
@@ -61,3 +64,9 @@ sort: 08_sort.o syscall.o num2str.o arrays.o
 
 08_sort.o: 08_sort/sort.s
 	nasm -f elf32 08_sort/sort.s -o 08_sort.o
+
+argc: 09_argc.o syscall.o num2str.o args.o
+	ld -m elf_i386 09_argc.o syscall.o num2str.o args.o -o argc
+
+09_argc.o: 09_argc/argc.s
+	nasm -f elf32 09_argc/argc.s -o 09_argc.o
