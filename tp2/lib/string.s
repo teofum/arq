@@ -33,6 +33,51 @@ strlen_end:
     pop ebx
     ret
 
+global strcmp
+
+; strcmp
+;
+; Compares two strings lexicographically. Returns zero if the 
+; strings are equal, negative value if lhs is first, positive
+; value if rhs is first.
+; EAX: (in) pointer to lhs
+; EBX: (in) pointer to rhs
+; AL: (out) return value
+;
+; Example call
+; mov eax, str1
+; mov ebx, str2
+; call strcmp
+; cmp al, 0
+
+strcmp:
+    push ecx
+    push edx
+
+    mov ecx, 0
+    mov edx, 0
+
+strcmp_cmp_char:
+    mov cl, [eax]
+    mov dl, [ebx]
+
+    sub cl, dl          ; Compare characters
+    jnz strcmp_end      ; Chars are different, return
+
+    cmp dl, 0           ; Look for a null terminator
+    je  strcmp_end      ; Chars are equal and both are 0, strings are equal
+
+    inc eax
+    inc ebx
+    jmp strcmp_cmp_char
+
+strcmp_end:
+    mov eax, ecx
+
+    pop edx
+    pop ecx
+    ret
+
 global print
 extern write_stdout
 

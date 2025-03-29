@@ -79,3 +79,9 @@ argv: 10_argv.o syscall.o num2str.o args.o string.o
 
 10_argv.o: 10_argv/argv.s
 	nasm -g -F dwarf -f elf32 10_argv/argv.s -o 10_argv.o
+
+env: 11_env.o syscall.o num2str.o args.o string.o
+	ld -g -m elf_i386 11_env.o syscall.o num2str.o args.o string.o -o env
+
+11_env.o: 11_env/env.s
+	nasm -g -F dwarf -f elf32 11_env/env.s -o 11_env.o
