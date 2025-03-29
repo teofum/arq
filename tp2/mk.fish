@@ -21,7 +21,7 @@ section .data" >> $dir_name/$name.s
 
 echo "
 $name: $dir_name.o syscall.o $libs
-	ld -m elf_i386 $dir_name.o syscall.o $libs -o $name
+	ld -g -m elf_i386 $dir_name.o syscall.o $libs -o $name
 
 $dir_name.o: $dir_name/$name.s
-	nasm -f elf32 $dir_name/$name.s -o $dir_name.o" >> Makefile
+	nasm -g -F dwarf -f elf32 $dir_name/$name.s -o $dir_name.o" >> Makefile

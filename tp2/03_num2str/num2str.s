@@ -2,9 +2,9 @@ section .text
 
 global _start
 
-extern write_stdout
 extern exit
 extern num2str
+extern println
 
 _start:
     mov eax, [num]
@@ -12,13 +12,10 @@ _start:
     mov eax, string
     push eax
     call num2str
-
-    mov ecx, string ; ptr to text
-    mov edx, 2      ; char count
-    call write_stdout
+    call println
 
     call exit
 
 section .data
 num     dd 76
-string  db "       "
+string  db "xxxxxxx"
