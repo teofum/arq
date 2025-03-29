@@ -1,11 +1,12 @@
 section .text
 global _start
 
-extern write_stdout
 extern exit
 extern num2str
 extern sort
 extern qsort
+extern print
+extern println
 
 _start:
     ; Sort array
@@ -13,25 +14,35 @@ _start:
     mov ebx, [len]
     call sort
 
+    mov ecx, eax
+    jmp loop
+
+loop_pre:
+    mov eax, comma
+    call print
+
 loop:
     ; Print to string and write to stdout
-    mov ecx, [eax]
-    push ecx
-    mov ecx, ost
-    push ecx
+    mov eax, [ecx]
+    push eax
+    mov eax, string
+    push eax
     call num2str
+    call print
 
-    mov edx, oln
-    call write_stdout
-
-    add eax, 4
+    add ecx, 4
     dec ebx
-    jnz loop
+    jnz loop_pre
+
+    ; Print a newline
+    mov eax, comma
+    add eax, 2      ; Empty string
+    call println
 
     call exit
 
 section .data
-arr dd  9, 5, 10, 3, 1, 4, 2, 7, 6, 8
-len dd 10
-ost db "   , "
-oln equ $-ost
+arr     dd  9, 5, 10, 3, 1, 4, 2, 7, 6, 8
+len     dd  10
+string  db  "     "
+comma   db  ", ", 0

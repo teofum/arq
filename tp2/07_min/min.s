@@ -1,10 +1,10 @@
 section .text
 global _start
 
-extern write_stdout
 extern exit
 extern num2str
 extern min
+extern println
 
 _start:
     ; Get minimum of array
@@ -15,17 +15,14 @@ _start:
     ; Print to string and write to stdout
     mov eax, [eax]
     push eax
-    mov ecx, ost
-    push ecx
+    mov eax, ost
+    push eax
     call num2str
-
-    mov edx, oln
-    call write_stdout
+    call println
 
     call exit
 
 section .data
 arr dd  9, 5, 10, 3, 1, 4, 2, 7, 6, 8
-len dd 10
-ost db "     ", 10
-oln equ $-ost
+len dd  10
+ost db  "     "

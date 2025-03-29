@@ -2,10 +2,10 @@ section .text
 
 global _start
 
-extern write_stdout
 extern exit
 extern sum
 extern num2str
+extern println
 
 _start:
     mov eax, [num]
@@ -15,10 +15,7 @@ _start:
     mov eax, string
     push eax
     call num2str
-
-    mov ecx, string ; ptr to text
-    mov edx, len    ; char count
-    call write_stdout
+    call println
 
     call exit
 

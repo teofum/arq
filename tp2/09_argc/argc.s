@@ -3,7 +3,7 @@ global _start
 
 extern exit
 extern num2str
-extern write_stdout
+extern println
 extern argc
 
 _start:
@@ -11,15 +11,12 @@ _start:
     call argc
 
     push eax
-    mov ecx, ost
-    push ecx
+    mov eax, ost
+    push eax
     call num2str
-
-    mov edx, len
-    call write_stdout
+    call println
 
     call exit
 
 section .data
-ost db  "    ", 10
-len equ $-ost
+ost db  "    "

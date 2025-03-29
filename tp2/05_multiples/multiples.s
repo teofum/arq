@@ -1,32 +1,27 @@
 section .text
 global _start
 
-extern write_stdout
 extern exit
 extern num2str
+extern println
 
 _start:
     ; Initialize
-    mov eax, [n]
+    mov eax, ost    ; Need the mem address in a register so we can push it
     mov ebx, [k]
-    mov ecx, ost    ; Need the mem address in a register so we can push it
-    mov edx, eax
+    mov ecx, [n]
+    mov edx, ecx
 
 loop:
-    ; Print number to string
-    push eax
+    ; Print number to stdout
     push ecx
+    push eax
     call num2str
-
-    ; Print to stdout
-    pushad          ; Store regs
-    mov edx, len
-    call write_stdout
-    popad           ; Restore regs
+    call println
 
     ; Increase by n and loop while n <= k
-    add eax, edx
-    cmp eax, ebx
+    add ecx, edx
+    cmp ecx, ebx
     jle loop
 
     call exit
@@ -34,5 +29,4 @@ loop:
 section .data
 n   dd  3
 k   dd  121
-ost db  "     ", 10
-len equ $-ost
+ost db  "     "
