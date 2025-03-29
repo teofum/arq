@@ -15,8 +15,8 @@ arrays.o: lib/arrays.s
 args.o: lib/args.s
 	nasm -g -F dwarf -f elf32 lib/args.s -o args.o
 
-print.o: lib/print.s
-	nasm -g -F dwarf -f elf32 lib/print.s -o print.o
+string.o: lib/string.s
+	nasm -g -F dwarf -f elf32 lib/string.s -o string.o
 
 # Binary targets
 
@@ -32,50 +32,50 @@ happy: 02_happy.o syscall.o
 02_happy.o: 02_happy/happy.s
 	nasm -g -F dwarf -f elf32 02_happy/happy.s -o 02_happy.o
 
-num2str: 03_num2str.o num2str.o syscall.o print.o
-	ld -g -m elf_i386 03_num2str.o num2str.o syscall.o print.o -o num2str
+num2str: 03_num2str.o num2str.o syscall.o string.o
+	ld -g -m elf_i386 03_num2str.o num2str.o syscall.o string.o -o num2str
 
 03_num2str.o: 03_num2str/num2str.s
 	nasm -g -F dwarf -f elf32 03_num2str/num2str.s -o 03_num2str.o
 
-sum: 04_sum.o sum.o num2str.o syscall.o print.o
-	ld -g -m elf_i386 04_sum.o sum.o num2str.o syscall.o print.o -o sum
+sum: 04_sum.o sum.o num2str.o syscall.o string.o
+	ld -g -m elf_i386 04_sum.o sum.o num2str.o syscall.o string.o -o sum
 
 04_sum.o: 04_sum/sum.s
 	nasm -g -F dwarf -f elf32 04_sum/sum.s -o 04_sum.o
 
-multiples: 05_multiples.o num2str.o syscall.o print.o
-	ld -g -m elf_i386 05_multiples.o num2str.o syscall.o print.o -o multiples
+multiples: 05_multiples.o num2str.o syscall.o string.o
+	ld -g -m elf_i386 05_multiples.o num2str.o syscall.o string.o -o multiples
 
 05_multiples.o: 05_multiples/multiples.s
 	nasm -g -F dwarf -f elf32 05_multiples/multiples.s -o 05_multiples.o
 
-fact: 06_fact.o num2str.o syscall.o print.o
-	ld -g -m elf_i386 06_fact.o num2str.o syscall.o print.o -o fact
+fact: 06_fact.o num2str.o syscall.o string.o
+	ld -g -m elf_i386 06_fact.o num2str.o syscall.o string.o -o fact
 
 06_fact.o: 06_fact/fact.s
 	nasm -g -F dwarf -f elf32 06_fact/fact.s -o 06_fact.o
 
-min: 07_min.o syscall.o num2str.o arrays.o print.o
-	ld -g -m elf_i386 07_min.o syscall.o num2str.o arrays.o print.o -o min
+min: 07_min.o syscall.o num2str.o arrays.o string.o
+	ld -g -m elf_i386 07_min.o syscall.o num2str.o arrays.o string.o -o min
 
 07_min.o: 07_min/min.s
 	nasm -g -F dwarf -f elf32 07_min/min.s -o 07_min.o
 
-sort: 08_sort.o syscall.o num2str.o arrays.o print.o
-	ld -g -m elf_i386 08_sort.o syscall.o num2str.o arrays.o print.o -o sort
+sort: 08_sort.o syscall.o num2str.o arrays.o string.o
+	ld -g -m elf_i386 08_sort.o syscall.o num2str.o arrays.o string.o -o sort
 
 08_sort.o: 08_sort/sort.s
 	nasm -g -F dwarf -f elf32 08_sort/sort.s -o 08_sort.o
 
-argc: 09_argc.o syscall.o num2str.o args.o print.o
-	ld -g -m elf_i386 09_argc.o syscall.o num2str.o args.o print.o -o argc
+argc: 09_argc.o syscall.o num2str.o args.o string.o
+	ld -g -m elf_i386 09_argc.o syscall.o num2str.o args.o string.o -o argc
 
 09_argc.o: 09_argc/argc.s
 	nasm -g -F dwarf -f elf32 09_argc/argc.s -o 09_argc.o
 
-argv: 10_argv.o syscall.o num2str.o args.o print.o
-	ld -g -m elf_i386 10_argv.o syscall.o num2str.o args.o print.o -o argv
+argv: 10_argv.o syscall.o num2str.o args.o string.o
+	ld -g -m elf_i386 10_argv.o syscall.o num2str.o args.o string.o -o argv
 
 10_argv.o: 10_argv/argv.s
 	nasm -g -F dwarf -f elf32 10_argv/argv.s -o 10_argv.o
