@@ -3,29 +3,25 @@ global _start
 
 extern exit
 extern println
-extern env
-
-extern strcmp
 extern argv
-extern num2str
+extern find_env
 
 _start:
     mov ebp, esp
-    mov ebx, 0
 
-loop:
-    mov eax, ebx
-    call env
+    mov eax, 0
+    call argv       ; EAX <- first arg value
+    call find_env   ; EAX <- pointer to env var with that name
+
     cmp eax, 0
-    je  end         ; If eax = 0 there are no more env vars, exit
+    jne found
 
-    call println    ; Print var
+    mov eax, str_not_found
 
-    inc ebx
-    jmp loop
+found:
+    call println
 
-end:
     call exit
 
 section .data
-ost     db  "                "
+str_not_found   db "Environment variable not found", 0

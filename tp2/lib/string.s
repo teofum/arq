@@ -78,6 +78,40 @@ strcmp_end:
     pop ecx
     ret
 
+global strcpy
+
+; strcpy
+;
+; Copy a string to a destination address, until a limiter character
+; is found. The limiter char is replaced with a null terminator.
+; EAX: (in) begin of source string, (out) end of string or limit char
+; EDX: begin of destination string
+; CL: limiter char
+
+strcpy:
+    push ecx
+    push edx
+
+strcpy_loop:
+    mov ch, [eax]
+    cmp ch, cl
+    je  strcpy_end  ; Found the limiter char, end here
+    cmp ch, 0
+    je  strcpy_end  ; Found a null terminator, end here
+
+    mov [edx], ch
+    inc eax
+    inc edx
+    jmp strcpy_loop
+
+strcpy_end:
+    mov ch, 0
+    mov [edx], ch
+
+    pop edx
+    pop ecx
+    ret
+
 global print
 extern write_stdout
 
