@@ -29,4 +29,4 @@ loop:
 section .data
 n   dd  3
 k   dd  121
-ost db  "     "
+ost db  64 dup (0)

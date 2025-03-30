@@ -19,4 +19,4 @@ _start:
     call exit
 
 section .data
-ost db  "    "
+ost db  64 dup (0)

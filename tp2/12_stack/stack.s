@@ -45,4 +45,4 @@ end:
 section .data
 str_begin   db  "Stack is ", 0
 str_end     db  " bytes long", 0
-string      db  "                "
+string      db  64 dup (0)

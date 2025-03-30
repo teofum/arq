@@ -31,4 +31,4 @@ loop:
 section .data
 n   dd  8
 pre db  "8! = "
-ost db  "          "
+ost db  64 dup (0)

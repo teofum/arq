@@ -119,5 +119,5 @@ find_env_end:
     ret
 
 section .data
-find_env_var_addr dd 0
-find_env_varname db  "                                                                "
+find_env_var_addr   dd  0
+find_env_varname    db  256 dup (0)

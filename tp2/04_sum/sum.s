@@ -21,5 +21,4 @@ _start:
 
 section .data
 num     dd 1000
-string  db "       "
-len     equ $-string
+string  db 64 dup (0)

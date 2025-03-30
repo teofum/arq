@@ -44,5 +44,5 @@ loop:
 section .data
 arr     dd  9, 5, 10, 3, 1, 4, 2, 7, 6, 8
 len     dd  10
-string  db  "     "
+string  db  64 dup (0)
 comma   db  ", ", 0

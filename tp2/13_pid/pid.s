@@ -23,7 +23,7 @@ _start:
     call exit
 
 section .data
-pid_str db  "                "
+pid_str db  64 dup (0)
 
 section .rodata
 pid_pre db  "My PID is ", 0

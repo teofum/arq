@@ -57,4 +57,4 @@ section .data
 arg_str db  "argc: ", 0
 begin   db  "argv[", 0
 close   db  "]: ", 0
-num     db  "    "
+num     db  64 dup (0)
