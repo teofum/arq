@@ -91,3 +91,9 @@ stack: 12_stack.o syscall.o num2str.o string.o
 
 12_stack.o: 12_stack/stack.s
 	nasm -g -F dwarf -f elf32 12_stack/stack.s -o 12_stack.o
+
+pid: 13_pid.o syscall.o num2str.o string.o
+	ld -g -m elf_i386 13_pid.o syscall.o num2str.o string.o -o pid
+
+13_pid.o: 13_pid/pid.s
+	nasm -g -F dwarf -f elf32 13_pid/pid.s -o 13_pid.o

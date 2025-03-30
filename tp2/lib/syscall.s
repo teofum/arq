@@ -40,3 +40,19 @@ exit:
     mov eax, 01h    ; exit
     mov ebx, 0      ; exit with code 0, success
     int 80h
+
+global getpid
+
+; getpid
+;
+; Get the current PID
+; EAX: (out) PID
+;
+; Example call
+; call getpid
+
+getpid:
+    mov eax, 14h
+    int 80h
+
+    ret
