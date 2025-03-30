@@ -86,6 +86,12 @@ env: 11_env.o syscall.o num2str.o args.o string.o
 11_env.o: 11_env/env.s
 	nasm -g -F dwarf -f elf32 11_env/env.s -o 11_env.o
 
+env_list: 11_env_list.o syscall.o args.o string.o
+	ld -g -m elf_i386 11_env_list.o syscall.o args.o string.o -o env_list
+
+11_env_list.o: 11_env/env_list.s
+	nasm -g -F dwarf -f elf32 11_env/env_list.s -o 11_env_list.o
+
 stack: 12_stack.o syscall.o num2str.o string.o
 	ld -g -m elf_i386 12_stack.o syscall.o num2str.o string.o -o stack
 
