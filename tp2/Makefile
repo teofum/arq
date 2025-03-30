@@ -26,8 +26,8 @@ hello: 01_hello.o syscall.o
 01_hello.o: 01_hello/hello.s
 	nasm -g -F dwarf -f elf32 01_hello/hello.s -o 01_hello.o
 
-happy: 02_happy.o syscall.o
-	ld -g -m elf_i386 02_happy.o syscall.o -o happy
+happy: 02_happy.o syscall.o string.o
+	ld -g -m elf_i386 02_happy.o syscall.o string.o -o happy
 
 02_happy.o: 02_happy/happy.s
 	nasm -g -F dwarf -f elf32 02_happy/happy.s -o 02_happy.o
@@ -109,3 +109,9 @@ sleep: 15_sleep.o syscall.o string.o
 
 15_sleep.o: 15_sleep/sleep.s
 	nasm -g -F dwarf -f elf32 15_sleep/sleep.s -o 15_sleep.o
+
+read: 16_read.o syscall.o string.o
+	ld -g -m elf_i386 16_read.o syscall.o string.o -o read
+
+16_read.o: 16_read/read.s
+	nasm -g -F dwarf -f elf32 16_read/read.s -o 16_read.o

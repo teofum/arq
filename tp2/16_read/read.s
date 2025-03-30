@@ -2,15 +2,21 @@ section .text
 global _start
 
 extern exit
+extern read_stdin
 extern println
 extern to_upper
 
 _start:
-    mov eax, string ; ptr to text
+    mov ecx, buf
+    mov edx, size
+    call read_stdin
+
+    mov eax, buf
     call to_upper
     call println
 
     call exit
 
 section .data
-string  db  "h4ppy c0d1ng", 10, 0
+buf     db  1024 dup (0)
+size    equ $-buf

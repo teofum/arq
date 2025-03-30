@@ -26,6 +26,34 @@ write_stdout:
     mov esp, ebp
     pop ebp
     ret
+    
+global read_stdin
+
+; read_stdin
+;
+; Read text from stdin using the read system call
+; ECX: buffer to read data to
+; EDX: max character count to read
+;
+; Example call
+; mov ecx, string
+; mov edx, max_len
+; call read_stdin
+
+read_stdin:
+    push ebp
+    mov ebp, esp
+    pushad
+
+    mov eax, 03h    ; read
+    mov ebx, 1      ; stdin file descriptor
+    int 80h
+
+    popad
+    mov esp, ebp
+    pop ebp
+    ret
+
 
 global exit
 

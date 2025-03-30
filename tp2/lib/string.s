@@ -157,5 +157,69 @@ println:
 
     ret
 
+global is_lower
+
+; is_lower
+; 
+; Returns 1 if a character is a lowercase letter, 0 if not.
+; AL: (in) character
+; EAX: (out) return value
+;
+; Example call
+; mov al '5'
+; call is_lower
+
+is_lower:
+    cmp al, 'a'
+    jl  is_lower_no
+    cmp al, 'z'
+    jg  is_lower_no
+
+    mov eax, 1
+    ret
+
+is_lower_no:
+    mov eax, 0
+    ret
+
+global to_upper
+
+; to_upper
+;
+; Convert a null-terminated string to uppercase. Uppercase
+; letters and non-letter characters are kept as is.
+; EAX: pointer to beginning of string
+;
+; Example call
+; mov eax string
+; call to_upper
+
+to_upper:
+    pushad
+    mov ebx, eax
+    mov ecx, 0
+
+to_upper_loop:
+    mov al, [ebx]
+    cmp al, 0
+    je  to_upper_end
+
+    mov cl, al
+    call is_lower
+    cmp eax, 0
+    je  to_upper_next
+
+    sub cl, 'a' - 'A' 
+    mov [ebx], cl
+
+to_upper_next:
+    inc ebx
+    jmp to_upper_loop
+
+to_upper_end:
+    popad
+    ret
+
 section .data
 nl  db  10
+
