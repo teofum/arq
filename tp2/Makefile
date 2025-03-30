@@ -103,3 +103,9 @@ fork: 14_fork.o syscall.o num2str.o string.o
 
 14_fork.o: 14_fork/fork.s
 	nasm -g -F dwarf -f elf32 14_fork/fork.s -o 14_fork.o
+
+sleep: 15_sleep.o syscall.o string.o
+	ld -g -m elf_i386 15_sleep.o syscall.o string.o -o sleep
+
+15_sleep.o: 15_sleep/sleep.s
+	nasm -g -F dwarf -f elf32 15_sleep/sleep.s -o 15_sleep.o
