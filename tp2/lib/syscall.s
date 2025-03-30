@@ -56,3 +56,23 @@ getpid:
     int 80h
 
     ret
+
+global fork
+
+; fork
+;
+; Fork the process. Returns the process PID
+; EAX: (out) PID
+;
+; Example call
+; call fork
+
+fork:
+    push ebx
+    mov eax, 02h
+    mov ebx, 0
+    int 80h
+
+    pop ebx
+    ret
+

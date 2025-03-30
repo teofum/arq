@@ -97,3 +97,9 @@ pid: 13_pid.o syscall.o num2str.o string.o
 
 13_pid.o: 13_pid/pid.s
 	nasm -g -F dwarf -f elf32 13_pid/pid.s -o 13_pid.o
+
+fork: 14_fork.o syscall.o num2str.o string.o
+	ld -g -m elf_i386 14_fork.o syscall.o num2str.o string.o -o fork
+
+14_fork.o: 14_fork/fork.s
+	nasm -g -F dwarf -f elf32 14_fork/fork.s -o 14_fork.o
