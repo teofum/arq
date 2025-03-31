@@ -76,7 +76,7 @@ sort_loop:
 
 global qsort
 
-; qsort (currently broken, TODO: debug this)
+; qsort
 ;
 ; Sorts an array of 4-byte signed integers in place
 ; Uses the quicksort algorithm
@@ -94,11 +94,8 @@ qsort:
     cmp ebx, 1
     jle qsort_end
 
-    push ebx        ; push len
-
     ; Initialize
     ; Use first element as pivot
-    mov ebx, eax    ; EBX <- pivot address
     mov ecx, [eax]  ; ECX <- pivot
     mov edx, eax    ; EDX <- right
     add edx, ebx    ; EAX + 4 * EBX - 4
@@ -106,13 +103,11 @@ qsort:
     add edx, ebx
     add edx, ebx
     sub edx, 4
+    push ebx        ; push len
+    mov ebx, eax    ; EBX <- pivot address
     add eax, 4      ; EAX <- left
 
 qsort_loop:
-    ; If left >= right stop
-    cmp eax, edx
-    jge qsort_divide
-
 qsort_loop_left:
     ; Increase EAX (left) until greater than or equal to pivot
     cmp ecx, [eax]
@@ -122,14 +117,18 @@ qsort_loop_left:
     jmp qsort_loop_left
 
 qsort_loop_right:
-    ; Decrease EDX (right) until less than pivot
+    ; Decrease EDX (right) until less than or equal to pivot
     cmp ecx, [edx]
-    jg  qsort_swap
+    jge qsort_swap
 
     sub edx, 4
     jmp qsort_loop_right
 
 qsort_swap:
+    ; If left >= right stop
+    cmp eax, edx
+    jge qsort_divide
+
     pushad
     mov ebx, [eax]
     mov ecx, [edx]
@@ -140,14 +139,15 @@ qsort_swap:
     jmp qsort_loop
 
 qsort_divide:
-    ; Swap left with pivot
+    ; Swap right with pivot
     push ecx
-    mov ecx, [eax]
+    mov ecx, [edx]
     mov [ebx], ecx
     pop ecx
-    mov [eax], ecx
+    mov [edx], ecx
     
     ; Sort left half: start = start, len = left - start
+    pushad
     sub eax, ebx        ; len - start * 4
     mov edx, 0
     push ebx
@@ -156,20 +156,22 @@ qsort_divide:
     pop ebx
     mov ecx, eax
     mov eax, ebx        ; EAX <- start
-    mov ebx, eax        ; EBX <- len - start
+    mov ebx, ecx        ; EBX <- len - start
     call qsort
+    popad
 
-    ; Sort right half: start = left, len = len - left + 1
+    ; Sort right half: start = left, len = len - (left - first) / 4
     mov ecx, eax        ; ECX <- left
-    pop eax             ; pop len
-    sub eax, ecx
+    mov eax, ecx
+    sub eax, ebx        ; EAX <- left - first
     mov edx, 0
     push ebx
     mov ebx, 4
     div ebx
     pop ebx
-    add eax, 4
-    mov ebx, eax
+    pop edx             ; pop len
+    sub edx, eax        ; EDX <- len - (left - first) / 4
+    mov ebx, edx
     mov eax, ecx
     call qsort
 

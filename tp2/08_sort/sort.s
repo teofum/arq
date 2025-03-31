@@ -12,7 +12,7 @@ _start:
     ; Sort array
     mov eax, arr
     mov ebx, [len]
-    call sort
+    call qsort
 
     mov ecx, eax
     jmp loop
