@@ -22,3 +22,11 @@ args: 01_args/main.o
 args2: 02_args2/main.c 
 	gcc -c 02_args2/main.c -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel -m32 -o args2.s
 
+pid: e3_pid/main.o e3_pid/pid.o 
+	gcc -g -m32 e3_pid/main.o e3_pid/pid.o  -o pid
+
+e3_pid/main.o: e3_pid/main.c
+	gcc -c -g -F dwarf -m32 e3_pid/main.c -o e3_pid/main.o
+
+e3_pid/pid.o: e3_pid/pid.s
+	nasm -g -F dwarf -f elf32 e3_pid/pid.s -o e3_pid/pid.o
