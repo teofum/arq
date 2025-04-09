@@ -18,3 +18,7 @@ args: 01_args/main.o
 
 01_args/main.o: 01_args/main.s
 	nasm -g -F dwarf -f elf32 01_args/main.s -o 01_args/main.o
+
+args2: 02_args2/main.c 
+	gcc -c 02_args2/main.c -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel -m32 -o args2.s
+
