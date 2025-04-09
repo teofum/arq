@@ -19,9 +19,8 @@ global main
 
 main:
 
-    mov eax, 01h    ; exit
-    mov ebx, 0      ; exit with code 0, success
-    int 80h
+    mov eax, 0      ; exit with code 0, success
+    ret
 
 section .data" >> $dir_name/main.s
 else if set -ql _flag_s

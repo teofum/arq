@@ -12,3 +12,9 @@ num2str_sprintf: e2_num2str_sprintf/main.o
 
 e2_num2str_sprintf/main.o: e2_num2str_sprintf/main.s
 	nasm -g -F dwarf -f elf32 e2_num2str_sprintf/main.s -o e2_num2str_sprintf/main.o
+
+args: 01_args/main.o 
+	gcc -g -m32 01_args/main.o  -o args
+
+01_args/main.o: 01_args/main.s
+	nasm -g -F dwarf -f elf32 01_args/main.s -o 01_args/main.o
