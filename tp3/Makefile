@@ -30,3 +30,16 @@ e3_pid/main.o: e3_pid/main.c
 
 e3_pid/pid.o: e3_pid/pid.s
 	nasm -g -F dwarf -f elf32 e3_pid/pid.s -o e3_pid/pid.o
+
+puts: 03_puts/main.o 03_puts/puts.o 03_puts/write.o
+	gcc -g -fno-builtin -m32 03_puts/main.o 03_puts/puts.o 03_puts/write.o -o puts
+
+03_puts/main.o: 03_puts/main.c
+	gcc -c -g -F dwarf -m32 03_puts/main.c -o 03_puts/main.o
+
+03_puts/puts.o: 03_puts/puts.c
+	gcc -c -g -F dwarf -m32 03_puts/puts.c -o 03_puts/puts.o
+
+03_puts/write.o: 03_puts/write.s
+	nasm -g -F dwarf -f elf32 03_puts/write.s -o 03_puts/write.o
+
