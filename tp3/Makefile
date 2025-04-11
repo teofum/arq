@@ -43,7 +43,6 @@ puts: 03_puts/main.o 03_puts/puts.o 03_puts/write.o
 03_puts/write.o: 03_puts/write.s
 	nasm -g -F dwarf -f elf32 03_puts/write.s -o 03_puts/write.o
 
-
 seven: 04_seven/main.o 04_seven/seven.o 
 	gcc -g -m32 04_seven/main.o 04_seven/seven.o  -o seven
 
@@ -52,3 +51,11 @@ seven: 04_seven/main.o 04_seven/seven.o
 
 04_seven/seven.o: 04_seven/seven.s
 	nasm -g -F dwarf -f elf32 04_seven/seven.s -o 04_seven/seven.o
+
+vars: 05_vars/vars1.c 05_vars/vars2.c 05_vars/vars3.c 05_vars/vars4.c 05_vars/vars5.c 05_vars/vars6.c
+	gcc -c 05_vars/vars1.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 05_vars/vars2.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 05_vars/vars3.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 05_vars/vars4.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 05_vars/vars5.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 05_vars/vars6.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
