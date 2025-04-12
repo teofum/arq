@@ -59,3 +59,11 @@ vars: 05_vars/vars1.c 05_vars/vars2.c 05_vars/vars3.c 05_vars/vars4.c 05_vars/va
 	gcc -c 05_vars/vars4.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
 	gcc -c 05_vars/vars5.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
 	gcc -c 05_vars/vars6.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+
+init: 06_init/init1.c 06_init/init2.c 06_init/init3.c 06_init/init4.c 06_init/init5.c 06_init/init6.c
+	gcc -c 06_init/init1.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 06_init/init2.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 06_init/init3.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 06_init/init4.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 06_init/init5.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+	gcc -c 06_init/init6.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
