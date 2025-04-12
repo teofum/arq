@@ -67,3 +67,12 @@ init: 06_init/init1.c 06_init/init2.c 06_init/init3.c 06_init/init4.c 06_init/in
 	gcc -c 06_init/init4.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
 	gcc -c 06_init/init5.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
 	gcc -c 06_init/init6.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel 
+
+loader: 07_loader/main.o 07_loader/loader.o
+	gcc -g -m32 -nostartfiles 07_loader/main.o 07_loader/loader.o -o loader
+
+07_loader/loader.o: 07_loader/loader.s
+	nasm -g -F dwarf -f elf32 07_loader/loader.s -o 07_loader/loader.o
+
+07_loader/main.o: 07_loader/main.c
+	gcc -c -g -F dwarf -m32 07_loader/main.c -o 07_loader/main.o
