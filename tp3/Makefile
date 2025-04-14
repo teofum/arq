@@ -94,3 +94,13 @@ cpuid: 09_cpuid/main.o 09_cpuid/cpuid.o
 
 09_cpuid/cpuid.o: 09_cpuid/cpuid.s
 	nasm -g -F dwarf -f elf32 09_cpuid/cpuid.s -o 09_cpuid/cpuid.o
+
+fib: 10_fib/main.o 10_fib/fib.o
+	gcc -g -m32 10_fib/main.o 10_fib/fib.o  -o fib
+	gcc -c 10_fib/main.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel -o fib_compiled.s
+
+10_fib/main.o: 10_fib/main.c
+	gcc -c -g -F dwarf -m32 10_fib/main.c -o 10_fib/main.o
+
+10_fib/fib.o: 10_fib/fib.s
+	nasm -g -F dwarf -f elf32 10_fib/fib.s -o 10_fib/fib.o
