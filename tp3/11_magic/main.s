@@ -20,6 +20,7 @@ main:
     call printf                             ;
     mov eax, 0
     leave                                   ; does this fall through? missing return
+    ret
 
 magia:
     push ebp                        ; build stack frame
