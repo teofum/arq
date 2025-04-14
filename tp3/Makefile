@@ -104,3 +104,9 @@ fib: 10_fib/main.o 10_fib/fib.o
 
 10_fib/fib.o: 10_fib/fib.s
 	nasm -g -F dwarf -f elf32 10_fib/fib.s -o 10_fib/fib.o
+
+magic: 11_magic/main.o 
+	gcc -g -m32 11_magic/main.o  -o magic
+
+11_magic/main.o: 11_magic/main.s
+	nasm -g -F dwarf -f elf32 11_magic/main.s -o 11_magic/main.o
