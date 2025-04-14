@@ -76,3 +76,12 @@ loader: 07_loader/main.o 07_loader/loader.o
 
 07_loader/main.o: 07_loader/main.c
 	gcc -c -g -F dwarf -m32 07_loader/main.c -o 07_loader/main.o
+
+my_stdlib: 08_my_stdlib/main.o 08_my_stdlib/my_stdlib.o 
+	gcc -g -m32 -fno-builtin 08_my_stdlib/main.o 08_my_stdlib/my_stdlib.o  -o my_stdlib
+
+08_my_stdlib/main.o: 08_my_stdlib/main.c
+	gcc -c -g -F dwarf -m32 08_my_stdlib/main.c -o 08_my_stdlib/main.o
+
+08_my_stdlib/my_stdlib.o: 08_my_stdlib/my_stdlib.s
+	nasm -g -F dwarf -f elf32 08_my_stdlib/my_stdlib.s -o 08_my_stdlib/my_stdlib.o
