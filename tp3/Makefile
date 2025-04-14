@@ -85,3 +85,12 @@ my_stdlib: 08_my_stdlib/main.o 08_my_stdlib/my_stdlib.o
 
 08_my_stdlib/my_stdlib.o: 08_my_stdlib/my_stdlib.s
 	nasm -g -F dwarf -f elf32 08_my_stdlib/my_stdlib.s -o 08_my_stdlib/my_stdlib.o
+
+cpuid: 09_cpuid/main.o 09_cpuid/cpuid.o 
+	gcc -g -m32 09_cpuid/main.o 09_cpuid/cpuid.o  -o cpuid
+
+09_cpuid/main.o: 09_cpuid/main.c
+	gcc -c -g -F dwarf -m32 09_cpuid/main.c -o 09_cpuid/main.o
+
+09_cpuid/cpuid.o: 09_cpuid/cpuid.s
+	nasm -g -F dwarf -f elf32 09_cpuid/cpuid.s -o 09_cpuid/cpuid.o
