@@ -110,3 +110,12 @@ magic: 11_magic/main.o
 
 11_magic/main.o: 11_magic/main.s
 	nasm -g -F dwarf -f elf32 11_magic/main.s -o 11_magic/main.o
+
+structs: 12_structs/main.o 12_structs/structs.o 
+	gcc -g -m32 12_structs/main.o 12_structs/structs.o  -o structs
+
+12_structs/main.o: 12_structs/main.c
+	gcc -c -g -F dwarf -m32 12_structs/main.c -o 12_structs/main.o
+
+12_structs/structs.o: 12_structs/structs.s
+	nasm -g -F dwarf -f elf32 12_structs/structs.s -o 12_structs/structs.o
