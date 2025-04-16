@@ -128,3 +128,15 @@ args64: 64_args64/main.o 64_args64/args64.o
 
 64_args64/args64.o: 64_args64/args64.s
 	nasm -g -F dwarf -f elf64 64_args64/args64.s -o 64_args64/args64.o
+
+debug1: 13a_debug1/main.o 
+	gcc -g -m32 13a_debug1/main.o  -o debug1
+
+13a_debug1/main.o: 13a_debug1/main.s
+	nasm -g -F dwarf -f elf32 13a_debug1/main.s -o 13a_debug1/main.o
+
+debug2: 13b_debug2/main.o 
+	gcc -g -m32 13b_debug2/main.o  -o debug2
+
+13b_debug2/main.o: 13b_debug2/main.s
+	nasm -g -F dwarf -f elf32 13b_debug2/main.s -o 13b_debug2/main.o
