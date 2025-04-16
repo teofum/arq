@@ -119,3 +119,12 @@ structs: 12_structs/main.o 12_structs/structs.o
 
 12_structs/structs.o: 12_structs/structs.s
 	nasm -g -F dwarf -f elf32 12_structs/structs.s -o 12_structs/structs.o
+
+args64: 64_args64/main.o 64_args64/args64.o 
+	gcc -g -m64 64_args64/main.o 64_args64/args64.o  -o args64
+
+64_args64/main.o: 64_args64/main.c
+	gcc -c -g -F dwarf -m64 64_args64/main.c -o 64_args64/main.o
+
+64_args64/args64.o: 64_args64/args64.s
+	nasm -g -F dwarf -f elf64 64_args64/args64.s -o 64_args64/args64.o
