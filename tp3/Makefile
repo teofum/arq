@@ -140,3 +140,9 @@ debug2: 13b_debug2/main.o
 
 13b_debug2/main.o: 13b_debug2/main.s
 	nasm -g -F dwarf -f elf32 13b_debug2/main.s -o 13b_debug2/main.o
+
+fact: 15_fact/main.o 
+	gcc -g -m32 15_fact/main.o  -o fact
+
+15_fact/main.o: 15_fact/main.c
+	gcc -c -g -F dwarf -m32 15_fact/main.c -o 15_fact/main.o
