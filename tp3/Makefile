@@ -146,3 +146,12 @@ fact: 15_fact/main.o
 
 15_fact/main.o: 15_fact/main.c
 	gcc -c -g -F dwarf -m32 15_fact/main.c -o 15_fact/main.o
+
+checklen: 16_checklen/main.o 16_checklen/checklen.o 
+	gcc -g -m32 16_checklen/main.o 16_checklen/checklen.o  -o checklen
+
+16_checklen/main.o: 16_checklen/main.c
+	gcc -c -g -F dwarf -m32 16_checklen/main.c -o 16_checklen/main.o
+
+16_checklen/checklen.o: 16_checklen/checklen.s
+	nasm -g -F dwarf -f elf32 16_checklen/checklen.s -o 16_checklen/checklen.o
