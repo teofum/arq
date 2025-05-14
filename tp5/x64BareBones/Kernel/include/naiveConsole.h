@@ -11,11 +11,13 @@ typedef enum {
   C_RED,
   C_MAGENTA,
   C_YELLOW,
-  C_WHITE
+  C_WHITE,
+  C_BRIGHT = 0x8
 } color_t;
 
 #define FG(x) (x)
 #define BG(x) ((x) << 4)
+#define BRIGHT(x) ((x) | C_BRIGHT)
 
 void ncPrint(const char *string);
 void ncPrintChar(char character);

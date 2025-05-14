@@ -1,6 +1,8 @@
+#include <kbd.h>
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include <rtc.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -72,8 +74,44 @@ void *initializeKernelBinary() {
   return getStackBase();
 }
 
+void printDateTime() {
+  static const char *daysOfWeek[8] = {"NULL",    "Sunday",    "Monday",
+                                      "Tuesday", "Wednesday", "Thursday",
+                                      "Friday",  "Saturday"};
+  static const char *months[13] = {
+      "NULL", "January", "February",  "March",   "April",    "May",     "June",
+      "July", "August",  "September", "October", "November", "December"};
+
+  datetime_t datetime = rtc_getdatetime();
+  ncPrint(daysOfWeek[datetime.date.dow]);
+  ncPrint(", ");
+  ncPrint(months[datetime.date.month]);
+  ncPrint(" ");
+  ncPrintHex(datetime.date.day);
+  ncPrint(", ");
+  ncPrintHex(datetime.date.year);
+  ncPrint("; ");
+  ncPrintHex(datetime.time.hours);
+  ncPrint(":");
+  ncPrintHex(datetime.time.minutes);
+  ncPrint(":");
+  ncPrintHex(datetime.time.seconds);
+}
+
 int main() {
   ncClear();
 
-  ncPrintColor("Arquitectura de Computadoras", FG(C_GREEN) | BG(C_WHITE));
+  ncPrintColor("Arquitectura de Computadoras",
+               FG(C_GREEN) | BG(BRIGHT(C_WHITE)));
+  ncNewline();
+  ncNewline();
+
+  ncPrint("The current date and time is:");
+  ncNewline();
+  printDateTime();
+
+  while (1) {
+    ncNewline();
+    ncPrintHex(kbd_getkey());
+  }
 }

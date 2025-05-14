@@ -1,7 +1,6 @@
-GLOBAL cpuVendor
-
 section .text
 	
+global cpuVendor
 cpuVendor:
 	push rbp
 	mov rbp, rsp
@@ -25,3 +24,23 @@ cpuVendor:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+global rtc_getval
+rtc_getval:
+	mov rax, rdi
+	out 0x70, al
+	
+	mov rax, 0
+	in al, 0x71
+	ret
+
+global kbd_getkey
+kbd_getkey:
+.loop:
+	in 	al, 0x64
+	and al, 0x1
+	jz	.loop
+	in 	al, 0x60
+	ret
+
+global 
