@@ -5,6 +5,7 @@
 
 #define ID_TIMER_TICK 0x20
 #define ID_KEYBOARD 0x21
+#define ID_SYSCALL 0x80
 
 typedef struct {
   uint16_t offset_l;
@@ -21,5 +22,7 @@ extern void pic_slave_mask(uint8_t mask);
 
 void set_interrupt_handler(int idx, void (*handler)());
 void setup_idt();
+
+void register_syscall(int idx, void *syscall);
 
 #endif

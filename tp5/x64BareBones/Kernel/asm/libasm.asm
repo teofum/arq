@@ -110,6 +110,19 @@ global _irq_01_handler
 _irq_01_handler:
     irq_handler 1
 
+global _syscall_handler
+extern _syscall_dispatch_table 
+_syscall_handler:
+    push rbp
+    mov rbp, rsp
+
+    mov rax, [_syscall_dispatch_table + rax * 8]
+    call rax
+
+    mov rsp, rbp
+    pop rbp
+    iretq
+
 global pic_master_mask
 pic_master_mask:
     mov rax, rdi
@@ -120,4 +133,10 @@ global pic_slave_mask
 pic_slave_mask:
     mov rax, rdi
     out 0xa1, al
+    ret
+
+global sys_example
+sys_example:
+    mov rax, 0
+    int 0x80
     ret

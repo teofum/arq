@@ -113,10 +113,21 @@ void timerTickHandler() {
   }
 }
 
+void exampleSyscall(int n) {
+  ncNewline();
+  ncPrint("example syscall called with parameter ");
+  ncPrintDec(n);
+  ncNewline();
+}
+
+extern void sys_example(int n);
+
 int main() {
   // Set up IDT and interrupt handlers
   set_interrupt_handler(0, timerTickHandler);
   set_interrupt_handler(1, kbd_irq_handler);
+
+  register_syscall(0, exampleSyscall);
   setup_idt();
 
   ncClear();
@@ -130,8 +141,12 @@ int main() {
   ncNewline();
   printDateTime();
 
+  int i = 1;
+
   while (1) {
     ncPrint(" ");
     ncPrintHex(kbd_getkey());
+
+    sys_example(i++);
   }
 }
