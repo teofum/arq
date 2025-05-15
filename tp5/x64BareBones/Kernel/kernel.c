@@ -1,3 +1,4 @@
+#include "idt.h"
 #include <kbd.h>
 #include <lib.h>
 #include <moduleLoader.h>
@@ -98,7 +99,26 @@ void printDateTime() {
   ncPrintHex(datetime.time.seconds);
 }
 
+void timerTickHandler() {
+  static int ticks = 0;
+
+  ticks++;
+  if (ticks >= 1) {
+    ncNewline();
+    ncPrint("Tick!");
+    ncNewline();
+    printDateTime();
+    ncNewline();
+    ticks -= 91;
+  }
+}
+extern void _irq_00_handler();
+
 int main() {
+  // Set up IDT and interrupt handlers
+  set_interrupt_handler(0, timerTickHandler);
+  setup_idt();
+
   ncClear();
 
   ncPrintColor("Arquitectura de Computadoras",
