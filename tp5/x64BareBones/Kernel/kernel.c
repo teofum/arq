@@ -112,11 +112,11 @@ void timerTickHandler() {
     ticks -= 91;
   }
 }
-extern void _irq_00_handler();
 
 int main() {
   // Set up IDT and interrupt handlers
   set_interrupt_handler(0, timerTickHandler);
+  set_interrupt_handler(1, kbd_irq_handler);
   setup_idt();
 
   ncClear();
@@ -131,7 +131,7 @@ int main() {
   printDateTime();
 
   while (1) {
-    ncNewline();
+    ncPrint(" ");
     ncPrintHex(kbd_getkey());
   }
 }

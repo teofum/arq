@@ -2,6 +2,7 @@
 #include <idt.h>
 
 extern void _irq_00_handler();
+extern void _irq_01_handler();
 
 idt_descriptor_t *idt = (idt_descriptor_t *)0x0;
 
@@ -29,7 +30,10 @@ void setup_idt() {
   // Timer tick
   setup_idt_entry(ID_TIMER_TICK, &_irq_00_handler);
 
-  pic_master_mask(0xfe);
+  // Timer tick
+  setup_idt_entry(ID_KEYBOARD, &_irq_01_handler);
+
+  pic_master_mask(0xfc);
   pic_slave_mask(0xff);
 
   _sti();

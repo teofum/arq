@@ -34,14 +34,14 @@ rtc_getval:
 	in al, 0x71
 	ret
 
-global kbd_getkey
-kbd_getkey:
-.loop:
-	in 	al, 0x64
-	and al, 0x1
-	jz	.loop
-	in 	al, 0x60
-	ret
+global kbd_irq_handler
+extern kbd_addKeyEvent
+kbd_irq_handler:
+    mov rax, 0
+    in al, 0x60
+    mov rdi, rax
+    call kbd_addKeyEvent
+    ret
 
 global _cli
 _cli:
@@ -105,6 +105,10 @@ extern irq_dispatch
 global _irq_00_handler
 _irq_00_handler:
     irq_handler 0
+
+global _irq_01_handler
+_irq_01_handler:
+    irq_handler 1
 
 global pic_master_mask
 pic_master_mask:

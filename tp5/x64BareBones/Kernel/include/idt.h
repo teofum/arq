@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #define ID_TIMER_TICK 0x20
+#define ID_KEYBOARD 0x21
 
 typedef struct {
   uint16_t offset_l;
